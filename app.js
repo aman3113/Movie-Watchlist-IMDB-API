@@ -12,11 +12,11 @@ searchBtn.addEventListener("click", function () {
     title: "",
     rating: "",
     runTime: "",
-    genere: "",
+    genre: "",
     plot: "",
   };
   let url = `
-  http://www.omdbapi.com/?t=${text}&apikey=c1f8d76a
+  http://www.omdbapi.com/?s=${text}&apikey=c1f8d76a
   `;
 
   console.log(url);
@@ -51,18 +51,17 @@ searchBtn.addEventListener("click", function () {
       dataEl.title = data.Title;
       dataEl.rating = data.imdbRating;
       dataEl.runTime = data.Runtime;
-      dataEl.genere = data.Genre;
+      dataEl.genre = data.Genre;
       dataEl.plot = data.Plot;
 
       document
         .getElementById("add-movie")
         .addEventListener("click", function () {
-          if (!myList.includes(dataEl)) {
-            console.log(true);
+          if (!myList.find(({ title }) => title === data.Title)) {
             myList.push(dataEl);
-          } else {
-            console.log(false);
+            console.log(true);
           }
+
           localStorage.setItem("myList", JSON.stringify(myList));
         });
     });
