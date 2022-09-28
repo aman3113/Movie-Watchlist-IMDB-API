@@ -38,7 +38,7 @@ searchBtn.addEventListener("click", function () {
           <div class="type">
             <span>${data.Runtime}</span>
             <span>${data.Genre}</span>
-            <span><img src="images/add icon.png" id="add-movie" onclick="addMovie()" />Watchlist</span>
+            <span><img src="images/add icon.png" id="add-movie" />Watchlist</span>
           </div>
           <div class="plot">${data.Plot}</div>
         </div>
@@ -46,23 +46,27 @@ searchBtn.addEventListener("click", function () {
       <div class="break"></div>
     `;
       displayEl.innerHTML = html;
+
       dataEl.poster = data.Poster;
       dataEl.title = data.Title;
       dataEl.rating = data.imdbRating;
       dataEl.runTime = data.Runtime;
       dataEl.genere = data.Genre;
       dataEl.plot = data.Plot;
+
+      document
+        .getElementById("add-movie")
+        .addEventListener("click", function () {
+          if (!myList.includes(dataEl)) {
+            console.log(true);
+            myList.push(dataEl);
+          } else {
+            console.log(false);
+          }
+          localStorage.setItem("myList", JSON.stringify(myList));
+        });
     });
   console.log(dataEl);
-  if (!myList.includes(dataEl)) {
-    myList.push(dataEl);
-  }
-
-  localStorage.setItem("myList", JSON.stringify(myList));
-  //   function addMovie() {
-  //     myList.push(dataEl);
-  //     localStorage.setItem("myList", JSON.stringify(myList));
-  //   }
 });
 
 console.log(myList);
