@@ -23,6 +23,7 @@ function movieSearch() {
 
 function moviesListGenerator(url) {
   let id = [];
+  // let myIdList = [];
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
@@ -40,30 +41,34 @@ function moviesListGenerator(url) {
             .then((movie) => {
               templateGenerator(movie);
 
-              const watchlistButton = document.querySelectorAll(".add-movie");
-              watchlistButton.forEach((btn) =>
+              const watchListButton = document.querySelectorAll(".add-movie");
+              watchListButton.forEach((btn) =>
                 btn.addEventListener("click", function () {
                   if (btn.textContent != "Added") {
-                    console.log(btn);
-                    console.log(this.id);
                     btn.textContent = "Added";
                     btn.style.backgroundColor = "rgb(60, 107, 60)";
                     btn.style.Color = "Black";
+                    // myIdList.push(this.id);
                     window.localStorage.setItem(this.id, this.id);
                   } else {
                     btn.innerHTML = `<img src="images/add icon.png"  />Watchlist`;
                     btn.style.backgroundColor = "#1c1c1c";
-                    window.localStorage.removeItem(this.id);
                     btn.style.Color = "White";
+                    // myIdList = myIdList.filter(function (item) {
+                    //   return item !== this.id;
+                    // });
+                    window.localStorage.removeItem(this.id);
                   }
                 })
               );
+
+              //
             });
         });
       }
     });
+  // window.localStorage.setItem("myListId", JSON.stringify(myIdList));
 }
-
 function templateGenerator(data) {
   displayEl.innerHTML += `
   <div class="movie-item">
@@ -86,23 +91,3 @@ function templateGenerator(data) {
     <div class="break"></div>
   `;
 }
-
-//     dataEl.poster = data.Poster;
-//     dataEl.title = data.Title;
-//     dataEl.rating = data.imdbRating;
-//     dataEl.runTime = data.Runtime;
-//     dataEl.genre = data.Genre;
-//     dataEl.plot = data.Plot;
-
-//     document
-//       .getElementById("add-movie")
-//       .addEventListener("click", function () {
-//         if (!myList.find(({ title }) => title === data.Title)) {
-//           myList.push(dataEl);
-//           console.log(true);
-//         }
-
-//         localStorage.setItem("myList", JSON.stringify(myList));
-//       });
-//   });
-// console.log(dataEl);
