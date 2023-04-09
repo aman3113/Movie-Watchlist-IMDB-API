@@ -15,7 +15,7 @@ function movieSearch() {
   displayEl.innerHTML = "";
   let inputStr = inputEl.value.replace(" ", "+");
   let url = `
-   http://www.omdbapi.com/?s=${inputStr}&apikey=c1f8d76a
+   https://www.omdbapi.com/?s=${inputStr}&apikey=c1f8d76a
  `;
   moviesListGenerator(url);
   inputEl.value = "";
